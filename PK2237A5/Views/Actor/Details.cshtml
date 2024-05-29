@@ -1,0 +1,99 @@
+﻿@model PK2237A5.Models.ActorWithShowInfoViewModel
+
+@{
+    ViewBag.Title = "Details";
+    var RequestUser = new PK2237A5.Controllers.RequestUser(User as System.Security.Claims.ClaimsPrincipal);
+}
+
+<h2>@Model.Name</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <div class="row">
+            <dt class="col-md-2 text-end">
+                @Html.DisplayNameFor(model => model.Name)
+            </dt>
+
+            <dd class="col-md-10">
+                @Html.DisplayFor(model => model.Name)
+            </dd>
+
+            <dt class="col-md-2 text-end">
+                @Html.DisplayNameFor(model => model.AlternateName)
+            </dt>
+
+            <dd class="col-md-10">
+                @Html.DisplayFor(model => model.AlternateName)
+            </dd>
+
+            <dt class="col-md-2 text-end">
+                @Html.DisplayNameFor(model => model.BirthDate)
+            </dt>
+
+            <dd class="col-md-10">
+                @Html.DisplayFor(model => model.BirthDate)
+            </dd>
+
+            <dt class="col-md-2 text-end">
+                @Html.DisplayNameFor(model => model.Height)
+            </dt>
+
+            <dd class="col-md-10">
+                @Html.DisplayFor(model => model.Height)
+            </dd>
+
+            <dt class="col-md-2 text-end">
+                @Html.DisplayNameFor(model => model.ImageUrl)
+            </dt>
+
+            <dd class="col-md-10">
+                <img src="@Html.DisplayFor(model => model.ImageUrl)" alt="@Html.DisplayFor(model => model.Name)" width="150" />
+            </dd>
+
+            <dt class="col-md-2 text-end">
+                @Html.DisplayNameFor(model => model.Executive)
+            </dt>
+
+            <dd class="col-md-10">
+                @Html.DisplayFor(model => model.Executive)
+            </dd>
+        </div>
+    </dl>
+    <hr />
+    <dl class="dl-horizontal">
+        <div class="row">
+            <dt class="col-md-2 text-end">
+                Appear in
+                <br />
+                <span class="badge bg-secondary">
+                    @Html.DisplayFor(model => model.ShowsCount) shows
+                </span>
+            </dt>
+
+            <dd class="col-md-10">
+                @if (Model.Shows != null && Model.Shows.Any())
+                {
+                    <div>
+                        @foreach (var show in Model.Shows)
+                        {
+                            <div>@show.Name</div>
+                        }
+                    </div>
+                }
+                else
+                {
+                    <p>No shows available</p>
+                }
+            </dd>
+        </div>
+    </dl>
+</div>
+<p>
+    @if (RequestUser.HasRoleClaim("Coordinator"))
+    {
+        @Html.ActionLink("Add New Show", "AddShow", new { id = Model.Id })
+    }
+     |
+    @Html.ActionLink("Back to List", "Index")
+</p>

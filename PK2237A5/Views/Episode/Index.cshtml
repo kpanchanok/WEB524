@@ -1,0 +1,67 @@
+﻿@model IEnumerable<PK2237A5.Models.EpisodeWithShowViewModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Episode List</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SeasonNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EpisodeNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Genre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AirDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ImageUrl)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Clerk)
+        </th>
+
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+            <br />
+            <i>@Html.DisplayFor(modelItem => item.ShowName)</i>
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SeasonNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EpisodeNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Genre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AirDate)
+        </td>
+        <td>
+            <img src="@Html.DisplayFor(modelItem => item.ImageUrl)" alt="@item.Name" weight="100" height="100" />
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Clerk)
+        </td>
+        <td>
+            @Html.ActionLink("Details", "Details", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>
